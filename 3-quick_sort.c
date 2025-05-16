@@ -1,5 +1,6 @@
 #include "sort.h"
 
+
 void quickSort(int *array, int start, int end, size_t length);
 int partition(int *array, int start, int end, size_t length);
 
@@ -11,7 +12,7 @@ int partition(int *array, int start, int end, size_t length);
 
 void quick_sort(int *array, size_t size)
 {	
-	if (!array)
+	if (!array || size == 1)
 		return;
 	quickSort(array, 0, size - 1, size);
 }
@@ -27,8 +28,8 @@ void quick_sort(int *array, size_t size)
 void quickSort(int *array, int start, int end, size_t length)
 {
 	int pivot;
-
-	if (end <= start)
+	
+    if (start < 0 || start >= end)
 		return;
 	pivot = partition(array, start, end, length);
 	quickSort(array, start, pivot - 1, length);
@@ -46,24 +47,31 @@ void quickSort(int *array, int start, int end, size_t length)
 
 int partition(int *array, int start, int end, size_t length)
 {
-	int i, j, temp, pivot = array[end];
+      int i, j, temp;
 
-	i = start - 1;
-	for (j = start; j < end; j++)
-	{
-		if (array[j] < pivot)
-		{
-			i++;
-			temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-			print_array(array, length);
-		}
-	}
-	i++;
-	temp = array[i];
-	array[i] = array[j];
-	array[j] = temp;
-	print_array(array, length);
-	return (i);
+      i = start;
+      j = start;
+      while (j < end)
+      {
+          if (array[j] <= array[end])
+          {
+            if (array[j] != array[i])
+            {
+                temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                print_array(array, length);
+            }
+            i++;
+          }
+          j++;
+      }
+      if (array[i] != array[end])
+      {
+          temp = array[i];
+          array[i] = array[end];
+          array[end] = temp;
+          print_array(array, length);
+      }
+      return i;
 }
