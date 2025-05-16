@@ -8,20 +8,21 @@ void counting_sort(int *array, size_t size)
     int j, max_val = array[0];
     size_t i;
 
-    output = malloc(sizeof(*output) * size);
-    count = malloc(sizeof(*count) * (max_val + 1));
-    if (!count || !output)
-    {
-        free(count);
-        free(output);
-        return;
-    }
     i = 1;
     while (i < size)
     {
         if (array[i] > max_val)
             max_val = array[i];
         i++;
+    }
+    output = malloc(sizeof(*output) * size);
+    if (output == NULL)
+        return;
+    count = malloc(sizeof(*count) * (max_val + 1));
+    if (count == NULL)
+    {
+        free(output);
+        return;
     }
     for (j = 0; j < max_val + 1; j++)
         count[j] = 0;
