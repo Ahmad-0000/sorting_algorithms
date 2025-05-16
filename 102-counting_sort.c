@@ -8,6 +8,8 @@ void counting_sort(int *array, size_t size)
     int j, max_val = array[0];
     size_t i;
 
+    if (!array || size == 1)
+        return;
     i = 1;
     while (i < size)
     {
