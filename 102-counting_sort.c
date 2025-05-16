@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
 
@@ -5,12 +6,13 @@ void counting_sort(int *array, size_t size)
 {
     int *count = NULL;
     int *output = NULL;
-    int j, max_val = array[0];
+    int j, max_val;
     size_t i;
 
-    if (!array || size == 1)
+    if (array == NULL || size == 1)
         return;
     i = 1;
+    max_val = array[0];
     while (i < size)
     {
         if (array[i] > max_val)
